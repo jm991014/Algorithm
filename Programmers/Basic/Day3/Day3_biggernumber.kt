@@ -1,3 +1,4 @@
+// 입력받은 두 수를 연결했을 때, 더 큰 수를 반환
 class Solution {
     fun solution(a: Int, b: Int): Int {
         var answer: Int = 0

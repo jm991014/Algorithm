@@ -1,3 +1,4 @@
+// 입력받은 문자열을 k번만큼 반복
 class Solution {
     fun solution(my_string: String, k: Int): String {
         var answer: String = ""
