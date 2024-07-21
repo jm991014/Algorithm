@@ -1,7 +1,7 @@
 class Solution {
     fun solution(numbers: IntArray): String {
         var result = numbers.map { it.toString() }
-            .sortedWith { a, b -> (b + a).compareTo(a + b) }
+            .sortedWith { num1, num2 -> (num2 + num1).compareTo(num1 + num2) }
             .joinToString("")
             
         return if (result[0] == '0') "0" else result
