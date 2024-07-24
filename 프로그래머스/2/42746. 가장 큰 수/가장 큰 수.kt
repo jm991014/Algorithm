@@ -1,6 +1,6 @@
 class Solution {
     fun solution(numbers: IntArray): String {
-        var result = numbers.map { it.toString() }
+        val result = numbers.map { it.toString() }
             .sortedWith { num1, num2 -> (num2 + num1).compareTo(num1 + num2) }
             .joinToString("")
             
