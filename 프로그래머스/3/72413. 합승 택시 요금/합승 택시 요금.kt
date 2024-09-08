@@ -5,9 +5,8 @@ class Solution {
         for (i in 1..n) { dist[i][i] = 0 }
 
         for (fare in fares) {
-            val (u, v, w) = fare
-            dist[u][v] = w
-            dist[v][u] = w
+            dist[fare[0]][fare[1]] = fare[2]
+            dist[fare[1]][fare[0]] = fare[2]
         }
         
         for (i in 1..n) {
