@@ -17,9 +17,7 @@ class Solution {
         
         while (pQueue.isNotEmpty()) {
             val (currentNode, currentDist) = pQueue.poll()
-            
             if (dist[currentNode] < currentDist) continue
-            
             for (i in graph[currentNode]) {
                 val nextDist = currentDist + i.second
                 if (nextDist < dist[i.first]) {
@@ -28,7 +26,6 @@ class Solution {
                 }
             }
         }
-        val maxDist = dist.drop(1).maxOrNull()
-        return dist.count { it == maxDist }
+        return dist.count { it == dist.drop(1).maxOrNull() }
     }
 }
