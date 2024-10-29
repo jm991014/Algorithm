@@ -1,6 +1,6 @@
 class Solution {
     fun solution(gems: Array<String>): IntArray {
-        var answer = intArrayOf()
+        var answer = IntArray(2)
         val totalGems = gems.toSet().size
         val gemMap = mutableMapOf<String, Int>()
         var start = 0
@@ -17,11 +17,9 @@ class Solution {
                     gemMap.remove(gems[start])
                 }
                 start++
-            } else if(end == gems.size) {
-                break
-            } else {
-                gemMap[gems[end]] = ++end
-            }
+            } 
+            else if(end == gems.size) break
+            else gemMap[gems[end]] = ++end
         }
         return answer
     }    
