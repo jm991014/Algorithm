@@ -19,19 +19,21 @@ class Solution {
                     val number = if(number == 0) 11 else number
                     val lDist = abs((left - number) / 3) + abs((left - number) % 3)
                     val rDist = abs((right - number) / 3) + abs((right - number) % 3)
-                    if (lDist == rDist) {
-                        if (hand.startsWith('l')) {
+                    when {
+                        lDist == rDist -> {
+                            if (hand.startsWith('l')) {
                             answer += 'L'
                             left = number
-                        } else {
-                            answer += 'R'
-                            right = number
+                            } else {
+                                answer += 'R'
+                                right = number
+                            }
                         }
-                    } else {
-                        if (lDist < rDist) {
+                        lDist < rDist -> {
                             answer += 'L'
                             left = number
-                        } else {
+                        }
+                        else -> {
                             answer += 'R'
                             right = number
                         }
