@@ -1,5 +1,3 @@
-import kotlin.math.abs
-
 class Solution {
     fun solution(survey: Array<String>, choices: IntArray): String {
         var answer: String = ""
