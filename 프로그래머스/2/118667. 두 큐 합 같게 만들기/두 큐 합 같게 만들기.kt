@@ -13,10 +13,10 @@ class Solution {
 
         while(true) {
             if (q1Sum == q2Sum) break
-            if (answer > queue1.size * 4) { 
+            else if (answer > queue1.size * 4) { 
                 answer = -1
                 break
-            }             
+            }
             when {
                 q1Sum > q2Sum -> {
                     val num = q1.poll()
