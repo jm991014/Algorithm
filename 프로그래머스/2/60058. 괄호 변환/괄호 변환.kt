@@ -6,7 +6,7 @@ class Solution {
         val u = p.substring(0, index + 1)
         val v = p.substring(index + 1)
 
-        return if (isCorrect(u)) u + solution(v)
+        return if (u.first() == '(' && u.last() == ')') u + solution(v)
         else {
             val answer = StringBuilder("(")
                 .append(solution(v))
@@ -29,13 +29,5 @@ class Solution {
             }
         }
         return idx
-    }
-     private fun isCorrect(p: String): Boolean {
-        var count = 0
-        for(i in p.indices){
-            if(p[i] == '(') count += 1 else count -= 1
-            if(count < 0) return false
-        }
-        return true
     }
 }
