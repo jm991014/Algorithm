@@ -18,7 +18,7 @@ class Solution {
         while (queue.isNotEmpty()) {
             val (row, col, dist) = queue.poll()
             if (dist > 2) continue
-            if (dist != 0 && room[row][col] == 'P') return false
+            if (dist > 0 && room[row][col] == 'P') return false
             for (i in direction) {
                 val nRow = row + i.first
                 val nCol = col + i.second
