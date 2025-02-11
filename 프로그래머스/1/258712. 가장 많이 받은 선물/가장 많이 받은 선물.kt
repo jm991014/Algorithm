@@ -11,18 +11,14 @@ class Solution {
         }
 
         friends.forEach { giver ->
-            val given = giveMap.getOrDefault(giver, emptyList())
-            val received = receiveMap.getOrDefault(giver, emptyList())
-            for (friend in friends) {
-                if (friend == giver) continue
-                else {
-                    if (given.count { it == friend } > received.count { it == friend }) nextMonth[giver] =
-                        nextMonth.getOrDefault(giver, 0) + 1
-                    else if (given.count { it == friend } == received.count { it == friend } && (given.size - received.size) > (giveMap.getOrDefault(
-                            friend, emptyList()
-                        ).size - receiveMap.getOrDefault(friend, emptyList()).size)) nextMonth[giver] =
-                        nextMonth.getOrDefault(giver, 0) + 1
-                }
+            val given = giveMap[giver].orEmpty()
+            val received = receiveMap[giver].orEmpty()
+
+            friends.filter { it != giver }.forEach { friend ->
+                if (given.count { it == friend } > received.count { it == friend } ||
+                    given.count { it == friend } == received.count { it == friend } && 
+                    (given.size - received.size) > (giveMap[friend].orEmpty().size - receiveMap[friend].orEmpty().size))
+                    nextMonth[giver] = nextMonth.getOrDefault(giver, 0) + 1
             }
         }
         return nextMonth.values.maxByOrNull { it } ?: 0
