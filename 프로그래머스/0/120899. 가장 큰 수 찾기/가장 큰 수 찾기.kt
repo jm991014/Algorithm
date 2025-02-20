@@ -1,9 +1,5 @@
 class Solution {
-    fun solution(array: IntArray): IntArray {
-        var answer: IntArray = intArrayOf()
-        val max = array.maxOf { it }
-        answer += max
-        answer += array.indexOf(max)
-        return answer
+    fun solution(array: IntArray): IntArray = array.withIndex().maxOf { it.value }.let { 
+        intArrayOf(it, array.indexOf(it))
     }
 }
