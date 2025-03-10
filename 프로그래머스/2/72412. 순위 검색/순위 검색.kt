@@ -37,11 +37,11 @@ class Solution {
 
     fun List<Int>.lowerBound(target: Int): Int {
         var low = 0
-        var high = this.size - 1
-        while (low <= high) {
+        var high = this.size
+        while (low < high) {
             val mid = (low + high) / 2
-            if (this[mid] < target) low = mid + 1
-            else high = mid - 1
+            if (target <= this[mid]) high = mid
+            else low = mid + 1
         }
         return this.size - low
     }
