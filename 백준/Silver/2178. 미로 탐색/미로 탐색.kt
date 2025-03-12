@@ -7,7 +7,8 @@ fun main() = with(System.out.bufferedWriter()) {
     val (N, M) = br.readLine().split(" ").map { it.toInt() }
     val maze = Array(N) { br.readLine().map { it.digitToInt() }.toIntArray() }
     bfs(maze)
-    println(count)
+    write("$count")
+    close()
 }
 
 fun bfs(maze: Array<IntArray>) {
