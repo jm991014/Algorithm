@@ -4,33 +4,33 @@ class Solution {
     var min = mutableListOf<Int>()
     fun solution(n: Int, wires: Array<IntArray>): Int {
         var answer: Int = n
-        
+
         repeat(n - 1) {
             min.clear()
             val graph = wires.splitWire(wires[it], n)
             val visited = BooleanArray(n + 1)
-            
+
             for (i in 1 until graph.size) {
-                if (!visited[i]) bfs(i, i, graph, visited)
+                if (!visited[i]) bfs(i, graph, visited)
             }
             answer = answer.coerceAtMost(Math.abs(min[0] - min[1]))
         }
         return answer
     }
-    
-    fun bfs(from: Int, to: Int, graph: Array<IntArray>, visited: BooleanArray) {
-        val queue = LinkedList<Pair<Int, Int>>().apply { add(Pair(from, to)) }
-        visited[from] = true
+
+    fun bfs(node: Int, graph: Array<IntArray>, visited: BooleanArray) {
+        val queue = LinkedList<Int>().apply { offer(node) }
+        visited[node] = true
         var count = 1
-        
+
         while (queue.isNotEmpty()) {
-            val (curF, curT) = queue.poll()
-            
+            val cur = queue.poll()
+
             for (i in graph.indices) {
-                if (graph[curT][i] == 1 && !visited[i]) {
+                if (graph[cur][i] == 1 && !visited[i]) {
                     visited[i] = true
                     count++
-                    queue.add(Pair(curT, i))
+                    queue.offer(i)
                 }
             }
         }
