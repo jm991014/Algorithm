@@ -1,39 +1,23 @@
-import java.util.LinkedList
-
 class Solution {
-    var network = 0
     fun solution(n: Int, computers: Array<IntArray>): Int {
-        var answer = 0
-        val graph = Array(n) { mutableListOf<Int>() }
-        val visited = BooleanArray(n)
-        
-        computers.forEachIndexed { idx, computer ->
-            computer.forEachIndexed { i, c ->
-                if (c == 1) graph[idx].add(i)
-            }
-        }
-                
-        for (i in graph.indices) {
-            for (j in graph[i].indices) {
-                if (!visited[i]) dfs(i, graph, visited)
-            }
-        }
-        return network
-    }
+        val network = Array(n + 1) { IntArray(n + 1) }
     
-    fun dfs(node: Int, graph: Array<MutableList<Int>>, visited: BooleanArray) {
-        val stack = LinkedList<Int>().apply { push(node) }
-        visited[node] = true
-        network++
+        var answer = 0
         
-        while (stack.isNotEmpty()) {
-            val cur = stack.pop()
-            for (i in graph[cur]) {
-                if (!visited[i]) {
-                    stack.push(i)
-                    visited[i] = true
-                }
+        computers.forEachIndexed { index, computer ->
+            for(i in 0 until n) {
+                network[index + 1][i + 1] = computer[i]
             }
         }
+
+        network.forEach { net ->
+            net.forEach {
+                print(it)
+            }
+        }
+        // dfs
+        
+        
+        return answer
     }
 }
