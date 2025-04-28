@@ -1,4 +1,3 @@
-import java.util.LinkedList
 import kotlin.math.ceil
 
 class Solution {
