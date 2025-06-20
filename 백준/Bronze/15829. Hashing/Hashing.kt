@@ -1,13 +1,18 @@
-import kotlin.math.pow
+import java.math.BigInteger
 
 private val br = System.`in`.bufferedReader()
+private val base = BigInteger.valueOf(31)
+private val mod =  BigInteger.valueOf(1234567891)
+private var code = BigInteger.ZERO
 
 fun main() = with(System.out.bufferedWriter()) {
     val L = br.readLine().toInt()
     val s = br.readLine()
-    var code = 0
+
     s.forEachIndexed { index, alphabet ->
-        code += (alphabet.code - 96) * 31.toDouble().pow(index.toDouble()).toInt()
+        val power = base.pow(index)
+        code += BigInteger.valueOf((alphabet.code - 96).toLong()).multiply(power)
     }
-    print(code % 1234567891)
+    write("${code % mod}")
+    close()
 }
