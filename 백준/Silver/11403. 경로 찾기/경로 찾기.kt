@@ -7,7 +7,7 @@ fun main() = with(System.out.bufferedWriter()) {
     for (i in 0 until N) {
         for (j in 0 until N) {
             for (k in 0 until N) {
-                if (graph[j][i] == 1 && graph[i][k] == 1) graph[j][k] = 1
+                if (graph[j][k] == 0 && graph[j][i] == 1 && graph[i][k] == 1) graph[j][k] = 1
             }
         }
     }
