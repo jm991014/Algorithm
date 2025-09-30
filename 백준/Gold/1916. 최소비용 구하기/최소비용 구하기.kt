@@ -16,6 +16,7 @@ fun main() = with(StringBuilder()) {
 
 fun Array<MutableList<Pair<Int, Int>>>.dijkstra(start: Int, end: Int): Int {
     val distance = IntArray(size) { Int.MAX_VALUE }.apply { this[start] = 0 }
+    val visited = BooleanArray(size)
     val pQueue = PriorityQueue<Pair<Int, Int>> { (_, cost1), (_, cost2) ->
         cost1.compareTo(cost2)
     }
@@ -24,13 +25,14 @@ fun Array<MutableList<Pair<Int, Int>>>.dijkstra(start: Int, end: Int): Int {
     while (pQueue.isNotEmpty()) {
         val (node, cost) = pQueue.poll()
 
-        if (distance[node] < cost) continue
+        if (visited[node] || distance[node] < cost) continue
+        visited[node] = true
 
         this[node].forEach { next ->
             val nextNode = next.first
             val nextCost = next.second + cost
 
-            if (nextCost < distance[nextNode]) {
+            if (!visited[nextNode] && nextCost < distance[nextNode]) {
                 distance[nextNode] = nextCost
                 pQueue.offer(nextNode to nextCost)
             }
