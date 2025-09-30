@@ -25,7 +25,7 @@ fun Array<MutableList<Pair<Int, Int>>>.dijkstra(start: Int, end: Int): Int {
     while (pQueue.isNotEmpty()) {
         val (node, cost) = pQueue.poll()
 
-        if (visited[node] || distance[node] < cost) continue
+        if (visited[node]) continue
         visited[node] = true
 
         this[node].forEach { next ->
