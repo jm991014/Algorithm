@@ -1,16 +1,18 @@
 private val br = System.`in`.bufferedReader()
 
-fun main() = with(System.out.bufferedWriter()) {
-    val N = br.readLine().toInt()
-    val stairs = IntArray(N) { br.readLine().toInt() }
-    val dp = IntArray(N + 1).apply {
-        this[1] = stairs[0]
-        if (N > 1) this[2] = stairs[0] + stairs[1]
+fun main() = with(StringBuilder()) {
+    val n = br.readLine().toInt()
+    val steps = IntArray(n + 1)
+
+    for (i in 1..n) steps[i] = br.readLine().toInt()
+
+    val dp = IntArray(n + 1).apply {
+        this[1] = steps[1]
+        if (n >= 2) this[2] = steps[1] + steps[2]
     }
 
-    for (i in 3..N) {
-        dp[i] = dp[i - 2].coerceAtLeast(dp[i - 3] + stairs[i - 2]) + stairs[i - 1]
+    for (i in 3..n) {
+        dp[i] = (steps[i] + steps[i - 1] + dp[i - 3]).coerceAtLeast(steps[i] + dp[i - 2])
     }
-    write("${dp[N]}")
-    close()
+    println(dp[n])
 }
