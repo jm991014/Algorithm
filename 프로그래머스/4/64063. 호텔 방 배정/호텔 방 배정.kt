@@ -16,7 +16,7 @@ class Solution {
             return room
         }
         
-        val nextRoom = getNextRoom(getOrDefault(room, 0L))
+        val nextRoom = getNextRoom(getValue(room))
         
         this[room] = nextRoom + 1
         return nextRoom
