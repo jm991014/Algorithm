@@ -5,30 +5,20 @@ class Solution {
         val inCnt = IntArray(maxVal) { 0 }
         val outCnt = IntArray(maxVal) { 0 }
 
-        for (edge in edges) {
-            val nowOut = edge[0]
-            val nowIn = edge[1]
+        edges.forEach { (nowOut, nowIn) ->
             outCnt[nowOut]++
             inCnt[nowIn]++
         }
 
         for (nowNode in 1 until maxVal) {
             when {
-                inCnt[nowNode] == 0 && outCnt[nowNode] >= 2 -> {
-                    answer[0] = nowNode
-                }
-                outCnt[nowNode] == 0 && inCnt[nowNode] > 0 -> {
-                    answer[2]++
-                }
-                inCnt[nowNode] >= 2 && outCnt[nowNode] == 2 -> {
-                    answer[3]++
-                }
+                inCnt[nowNode] == 0 && outCnt[nowNode] >= 2 -> answer[0] = nowNode
+                outCnt[nowNode] == 0 && inCnt[nowNode] > 0 -> answer[2]++
+                inCnt[nowNode] >= 2 && outCnt[nowNode] == 2 -> answer[3]++
             }
         }
 
-        if (answer[0] != 0) {
-             answer[1] = outCnt[answer[0]] - (answer[2] + answer[3])
-        }
+        if (answer[0] != 0) answer[1] = outCnt[answer[0]] - (answer[2] + answer[3])
 
         return answer
     }
