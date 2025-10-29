@@ -1,10 +1,10 @@
 # [level 2] 할인 행사 - 131127 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131127?language=java) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131127?language=kotlin) 
 
 ### 성능 요약
 
-메모리: 159 MB, 시간: 125.92 ms
+메모리: 127 MB, 시간: 122.74 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 10월 29일 18:49:56
+2025년 10월 29일 19:36:29
 
 ### 문제 설명
 
