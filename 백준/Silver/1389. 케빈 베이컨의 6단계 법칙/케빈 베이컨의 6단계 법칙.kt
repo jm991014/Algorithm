@@ -1,35 +1,22 @@
+import java.util.LinkedList
+
 private val br = System.`in`.bufferedReader()
 
 fun main() = with(System.out.bufferedWriter()) {
     val (N, M) = br.readLine().split(" ").map(String::toInt)
-    val relation = Array(N + 1) { IntArray(N + 1) { 500001 } }.apply {
-        (0..N).forEach { this[it][it] = 0 }
-    }
+    val relation = Array(N + 1) { mutableListOf<Int>() }
 
     repeat(M) {
         val (A, B) = br.readLine().split(" ").map(String::toInt)
-        relation[A][B] = 1
-        relation[B][A] = 1
-    }
-
-    for (k in 1..N) {
-        for (i in 1..N) {
-            for (j in 1..N) {
-                if (relation[i][j] > relation[i][k] + relation[k][j]) {
-                    relation[i][j] = relation[i][k] + relation[k][j]
-                }
-            }
-        }
+        relation[A].add(B)
+        relation[B].add(A)
     }
 
     var minBacon = 500001
     var winner = 0
 
     for (i in 1..N) {
-        var sum = 0
-        for (j in 1..N) {
-            sum += relation[i][j]
-        }
+        val sum = relation.bfs(i, N)
 
         if (sum < minBacon) {
             minBacon = sum
@@ -39,4 +26,25 @@ fun main() = with(System.out.bufferedWriter()) {
 
     write("$winner")
     close()
+}
+
+fun Array<MutableList<Int>>.bfs(start: Int, N: Int): Int {
+    val queue = LinkedList<Int>().apply { add(start) }
+    val visited = IntArray(N + 1) { -1 }.apply { this[start] = 0 }
+
+    var totalDist = 0
+
+    while (queue.isNotEmpty()) {
+        val curr = queue.poll()
+
+        for (next in this[curr]) {
+            if (visited[next] == -1) {
+                visited[next] = visited[curr] + 1
+                totalDist += visited[next]
+                queue.add(next)
+            }
+        }
+    }
+
+    return totalDist
 }
