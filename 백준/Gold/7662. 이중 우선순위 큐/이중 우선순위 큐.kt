@@ -1,25 +1,45 @@
+import java.util.PriorityQueue
+
 private val br = System.`in`.bufferedReader()
+
+data class Node(val index: Int, val value: Int)
+
+fun PriorityQueue<Node>.poll(deleted: BooleanArray): Node? {
+    while (isNotEmpty() && deleted[peek().index]) {
+        poll()
+    }
+    return poll()
+}
 
 fun main() = with(System.out.bufferedWriter()) {
     repeat(br.readLine().toInt()) {
-        val map = sortedMapOf<Int, Int>()
+        val k = br.readLine().toInt()
+        val minQueue = PriorityQueue<Node>(compareBy { it.value })
+        val maxQueue = PriorityQueue<Node>(compareByDescending { it.value })
+        val deleted = BooleanArray(k)
 
-        repeat(br.readLine().toInt()) {
+        repeat(k) {
             val (operator, n) = br.readLine().split(" ")
             val N = n.toInt()
             when (operator) {
-
-                "I" -> map[N] = map.getOrDefault(N, 0) + 1
-                "D" -> if (map.isNotEmpty()) {
-                    val key = if (N == 1) map.lastKey() else map.firstKey()
-
-                    if (map[key] == 1) map.remove(key)
-                    else map[key] = map.getOrDefault(key, 0) - 1
+                "I" -> {
+                    minQueue.offer(Node(it, N))
+                    maxQueue.offer(Node(it, N))
+                }
+                "D" -> {
+                    val targetQueue = if (N == 1) maxQueue else minQueue
+                    targetQueue.poll(deleted)?.also { deleted[it.index] = true }
                 }
             }
         }
-        if (map.isEmpty()) write("EMPTY\n")
-        else write("${map.lastKey()} ${map.firstKey()}\n")
+        val max = maxQueue.poll(deleted)
+        val min = minQueue.poll(deleted)
+
+        if (max == null || min == null) {
+            write("EMPTY\n")
+        } else {
+            write("${max.value} ${min.value}\n")
+        }
     }
     close()
 }
