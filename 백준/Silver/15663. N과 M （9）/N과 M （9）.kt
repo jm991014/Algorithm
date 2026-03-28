@@ -8,7 +8,7 @@ fun main() {
     val visited = BooleanArray(N)
     numbers.permutations(mutableListOf(), visited, M)
 
-    set.forEach { print("$it\n") }
+    set.forEach { bw.write("$it\n") }
     bw.close()
 }
 
