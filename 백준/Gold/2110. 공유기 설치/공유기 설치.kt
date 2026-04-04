@@ -23,15 +23,17 @@ fun main() {
 }
 
 fun LongArray.isAvailable(dist: Long, C: Int): Boolean {
-    val installed = BooleanArray(size).apply { this[0] = true }
-    var prev = 0
+    var installed = 1
+    var prev = this[0]
 
     for (i in 1 until size) {
-        if (this[i] - this[prev] >= dist) {
-            installed[i] = true
-            prev = i
+        if (this[i] - prev >= dist) {
+            installed++
+            prev = this[i]
         }
+
+        if (installed >= C) return true
     }
 
-    return installed.count { it } >= C
+    return installed >= C
 }
