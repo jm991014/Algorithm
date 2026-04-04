@@ -1,23 +1,22 @@
 private val br = System.`in`.bufferedReader()
+private val bw = System.out.bufferedWriter()
 
-fun main() = with(System.out.bufferedWriter()) {
+fun main() {
     val (N, S) = br.readLine().split(" ").map { it.toInt() }
-    val sequence = br.readLine().split(" ").map { it.toInt() }.toIntArray()
-    var count = Int.MAX_VALUE
-    var tmpSum = 0
+    val arr = br.readLine().split(" ").map { it.toLong() }.toLongArray()
+    var min = Int.MAX_VALUE
     var start = 0
     var end = 0
+    var sum = 0L
 
     while (true) {
-        if(tmpSum >= S) {
-            count = minOf(count, end - start)
-            tmpSum -= sequence[start++]
-        } else {
-            if (end == N) break
-            tmpSum += sequence[end++]
-        }
+        if (sum >= S) {
+            min = min.coerceAtMost(end - start)
+            sum -= arr[start++]
+        } else if (end == N) break
+        else sum += arr[end++]
     }
 
-    write(if(count == Int.MAX_VALUE) "0" else "$count")
-    close()
+    bw.write(if (min == Int.MAX_VALUE) "0" else "$min")
+    bw.close()
 }
